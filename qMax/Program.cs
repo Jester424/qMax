@@ -41,6 +41,9 @@ namespace qMax
                 Console.WriteLine($"Seeders: {t.NumSeeds}");
                 Console.WriteLine();
             }
+
+            await Program.PauseAllTorrents();
+
             Console.Read();
         }
 
@@ -69,6 +72,28 @@ namespace qMax
                 Console.WriteLine("No response received.");
             }
             return null;
+        }
+
+        ///api/v2/torrents/pause?hashes=8c212779b4abde7c6bc608063a0d008b7e40ce32|54eddd830a5b58480a6143d616a97e3a6c23c439
+        private static async Task PauseAllTorrents()
+        {
+            string url = "http://localhost:8080/api/v2/torrents/pause?hashes=all";
+            using HttpClient client = new HttpClient();
+
+            try
+            {
+                Console.WriteLine("Calling API...");
+
+                HttpResponseMessage response = await client.GetAsync(url);
+                response.EnsureSuccessStatusCode();
+
+                string apiResponse = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"Response: {apiResponse}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
         }
     }
 }

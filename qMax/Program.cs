@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
@@ -19,7 +20,7 @@ namespace qMax
         public string State { get; set; }
 
         [JsonPropertyName("num_complete")]
-        public int NumSeeds { get; set; } //Specifically, this is the number of seeds in the swarm, not the number of leechers the local user is seeding to
+        public int NumSeeds { get; set; }
     }
 
     class Program
@@ -29,33 +30,24 @@ namespace qMax
             //Example API
             // /api/v2/torrents/info?filter=downloading&category=sample%20category&sort=ratio
 
-            string url = "http://localhost:8080/api/v2/torrents/info";
+            string apiResponse = await Program.GetTorrents();
+            var torrents = JsonSerializer.Deserialize<List<TorrentInfo>>(apiResponse);
 
-            string apiResponse = await ApiCall(url);
-
-            if (apiResponse != null)
+            foreach (var t in torrents)
             {
-                var torrents = JsonSerializer.Deserialize<List<TorrentInfo>>(apiResponse);
-
-                foreach (var t in torrents)
-                {
-                    Console.WriteLine($"ID: {t.Hash}");
-                    Console.WriteLine($"Name: {t.Name}");
-                    Console.WriteLine($"State: {t.State}");
-                    Console.WriteLine($"Seeders: {t.NumSeeds}");
-                    Console.WriteLine();
-                }
+                Console.WriteLine($"ID: {t.Hash}");
+                Console.WriteLine($"Name: {t.Name}");
+                Console.WriteLine($"State: {t.State}");
+                Console.WriteLine($"Seeders: {t.NumSeeds}");
+                Console.WriteLine();
             }
-
-            url = "http://localhost:8080/api/v2/torrents/pause?heashes=all";
-
-
+            Console.Read();
         }
 
-        public static async Task<string> ApiCall(string url)
+        private static async Task<string> GetTorrents()
         {
             string apiResponse = null;
-
+            string url = "http://localhost:8080/api/v2/torrents/info";
             using HttpClient client = new HttpClient();
 
             try
@@ -72,13 +64,11 @@ namespace qMax
             {
                 Console.WriteLine($"Request error: {ex.Message}");
             }
-
             if (apiResponse == null)
             {
                 Console.WriteLine("No response received.");
             }
-
-            return apiResponse;
+            return null;
         }
     }
 }

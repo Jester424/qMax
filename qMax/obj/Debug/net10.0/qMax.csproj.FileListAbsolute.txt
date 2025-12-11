@@ -1,0 +1,15 @@
+C:\Users\nnico\source\repos\qMax\qMax\bin\Debug\net10.0\qMax.exe
+C:\Users\nnico\source\repos\qMax\qMax\bin\Debug\net10.0\qMax.deps.json
+C:\Users\nnico\source\repos\qMax\qMax\bin\Debug\net10.0\qMax.runtimeconfig.json
+C:\Users\nnico\source\repos\qMax\qMax\bin\Debug\net10.0\qMax.dll
+C:\Users\nnico\source\repos\qMax\qMax\bin\Debug\net10.0\qMax.pdb
+C:\Users\nnico\source\repos\qMax\qMax\obj\Debug\net10.0\qMax.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\nnico\source\repos\qMax\qMax\obj\Debug\net10.0\qMax.AssemblyInfoInputs.cache
+C:\Users\nnico\source\repos\qMax\qMax\obj\Debug\net10.0\qMax.AssemblyInfo.cs
+C:\Users\nnico\source\repos\qMax\qMax\obj\Debug\net10.0\qMax.csproj.CoreCompileInputs.cache
+C:\Users\nnico\source\repos\qMax\qMax\obj\Debug\net10.0\qMax.sourcelink.json
+C:\Users\nnico\source\repos\qMax\qMax\obj\Debug\net10.0\qMax.dll
+C:\Users\nnico\source\repos\qMax\qMax\obj\Debug\net10.0\refint\qMax.dll
+C:\Users\nnico\source\repos\qMax\qMax\obj\Debug\net10.0\qMax.pdb
+C:\Users\nnico\source\repos\qMax\qMax\obj\Debug\net10.0\qMax.genruntimeconfig.cache
+C:\Users\nnico\source\repos\qMax\qMax\obj\Debug\net10.0\ref\qMax.dll

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("qMax")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bfda40153f4048054215401f9ca3426ef1952a4d")]
 [assembly: System.Reflection.AssemblyProductAttribute("qMax")]
 [assembly: System.Reflection.AssemblyTitleAttribute("qMax")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

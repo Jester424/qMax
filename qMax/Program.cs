@@ -26,12 +26,35 @@ namespace qMax
     {
         static async Task Main(string[] args)
         {
-            string apiResponse = null;            
-
             //Example API
             // /api/v2/torrents/info?filter=downloading&category=sample%20category&sort=ratio
 
             string url = "http://localhost:8080/api/v2/torrents/info";
+
+            string apiResponse = await ApiCall(url);
+
+            if (apiResponse != null)
+            {
+                var torrents = JsonSerializer.Deserialize<List<TorrentInfo>>(apiResponse);
+
+                foreach (var t in torrents)
+                {
+                    Console.WriteLine($"ID: {t.Hash}");
+                    Console.WriteLine($"Name: {t.Name}");
+                    Console.WriteLine($"State: {t.State}");
+                    Console.WriteLine($"Seeders: {t.NumSeeds}");
+                    Console.WriteLine();
+                }
+            }
+
+            url = "http://localhost:8080/api/v2/torrents/pause?heashes=all";
+
+
+        }
+
+        public static async Task<string> ApiCall(string url)
+        {
+            string apiResponse = null;
 
             using HttpClient client = new HttpClient();
 
@@ -40,10 +63,10 @@ namespace qMax
                 Console.WriteLine("Calling API...");
 
                 HttpResponseMessage response = await client.GetAsync(url);
-
                 response.EnsureSuccessStatusCode();
 
                 apiResponse = await response.Content.ReadAsStringAsync();
+                return apiResponse;
             }
             catch (Exception ex)
             {
@@ -53,19 +76,9 @@ namespace qMax
             if (apiResponse == null)
             {
                 Console.WriteLine("No response received.");
-                return;
             }
 
-            var torrents = JsonSerializer.Deserialize<List<TorrentInfo>>(apiResponse);
-
-            foreach (var t in torrents)
-            {
-                Console.WriteLine($"ID: {t.Hash}");
-                Console.WriteLine($"Name: {t.Name}");
-                Console.WriteLine($"State: {t.State}");
-                Console.WriteLine($"Seeders: {t.NumSeeds}");
-                Console.WriteLine();
-            }
+            return apiResponse;
         }
     }
 }

@@ -19,7 +19,7 @@ namespace qMax
         public string State { get; set; }
 
         [JsonPropertyName("num_complete")]
-        public int NumSeeds { get; set; }
+        public int NumSeeds { get; set; } //Specifically, this is the number of seeds in the swarm, not the number of leechers the local user is seeding to
     }
 
     class Program

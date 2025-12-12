@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Net.Http;
+using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using static System.Net.WebRequestMethods;
+using Newtonsoft.Json;
 
 namespace qMax
 {
@@ -31,7 +33,7 @@ namespace qMax
             // /api/v2/torrents/info?filter=downloading&category=sample%20category&sort=ratio
 
             string apiResponse = await Program.GetTorrents();
-            var torrents = JsonSerializer.Deserialize<List<TorrentInfo>>(apiResponse);
+            var torrents = System.Text.Json.JsonSerializer.Deserialize<List<TorrentInfo>>(apiResponse);
 
             foreach (var t in torrents)
             {
@@ -72,29 +74,6 @@ namespace qMax
                     Console.WriteLine("No response received.");
                 }
                 return null;
-            };
-        }
-
-        ///api/v2/torrents/pause?hashes=8c212779b4abde7c6bc608063a0d008b7e40ce32|54eddd830a5b58480a6143d616a97e3a6c23c439
-        private static async Task PauseAllTorrents()
-        {
-            string url = "http://localhost:8080/api/v2/torrents/pause?hashes=all";
-            using (HttpClient client = new HttpClient())
-            {
-                try
-                {
-                    Console.WriteLine("Calling API...");
-
-                    HttpResponseMessage response = await client.GetAsync(url);
-                    response.EnsureSuccessStatusCode();
-
-                    string apiResponse = await response.Content.ReadAsStringAsync();
-                    Console.WriteLine($"Response: {apiResponse}");
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Error: {ex.Message}");
-                }
             };
         }
     }

@@ -25,6 +25,12 @@ namespace qMax
         public int NumSeeds { get; set; }
     }
 
+    public class Stop
+    {
+        [JsonPropertyName("hashes")]
+        public string Hashes { get; set; }
+    }
+
     class Program
     {
         static async Task Main(string[] args)
@@ -44,7 +50,7 @@ namespace qMax
                 Console.WriteLine();
             }
 
-            await Program.PauseAllTorrents();
+            StopTorrent();
 
             Console.Read();
         }
@@ -75,6 +81,24 @@ namespace qMax
                 }
                 return null;
             };
+        }
+
+        private static async Task<string> StopTorrent()
+        {
+            using (var client = new HttpClient())
+            {
+                var endpoint = new Uri("http://localhost:8080/api/v2/torrents/stop");
+                var newStop = new Stop()
+                {
+                    Hashes = "all"
+                };
+                var newPostJson = JsonConvert.SerializeObject(newStop);
+                var payload = new StringContent(newPostJson, Encoding.UTF8, "application/json");
+                var result = client.PostAsync(endpoint, payload).Result.Content.ReadAsStringAsync().Result;
+
+                Console.WriteLine(result);
+            };
+            return null;
         }
     }
 }

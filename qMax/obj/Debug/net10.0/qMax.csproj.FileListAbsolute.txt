@@ -13,3 +13,6 @@ C:\Users\nnico\source\repos\qMax\qMax\obj\Debug\net10.0\refint\qMax.dll
 C:\Users\nnico\source\repos\qMax\qMax\obj\Debug\net10.0\qMax.pdb
 C:\Users\nnico\source\repos\qMax\qMax\obj\Debug\net10.0\qMax.genruntimeconfig.cache
 C:\Users\nnico\source\repos\qMax\qMax\obj\Debug\net10.0\ref\qMax.dll
+C:\Users\nnico\source\repos\qMax\qMax\bin\Debug\net10.0\Newtonsoft.Json.dll
+C:\Users\nnico\source\repos\qMax\qMax\obj\Debug\net10.0\qMax.csproj.AssemblyReference.cache
+C:\Users\nnico\source\repos\qMax\qMax\obj\Debug\net10.0\qMax.csproj.Up2Date

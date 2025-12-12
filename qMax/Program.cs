@@ -51,49 +51,51 @@ namespace qMax
         {
             string apiResponse = null;
             string url = "http://localhost:8080/api/v2/torrents/info";
-            using HttpClient client = new HttpClient();
-
-            try
+            using (HttpClient client = new HttpClient())
             {
-                Console.WriteLine("Calling API...");
+                try
+                {
+                    Console.WriteLine("Calling API...");
 
-                HttpResponseMessage response = await client.GetAsync(url);
-                response.EnsureSuccessStatusCode();
+                    HttpResponseMessage response = await client.GetAsync(url);
+                    response.EnsureSuccessStatusCode();
 
-                apiResponse = await response.Content.ReadAsStringAsync();
-                return apiResponse;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Request error: {ex.Message}");
-            }
-            if (apiResponse == null)
-            {
-                Console.WriteLine("No response received.");
-            }
-            return null;
+                    apiResponse = await response.Content.ReadAsStringAsync();
+                    return apiResponse;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Request error: {ex.Message}");
+                }
+                if (apiResponse == null)
+                {
+                    Console.WriteLine("No response received.");
+                }
+                return null;
+            };
         }
 
         ///api/v2/torrents/pause?hashes=8c212779b4abde7c6bc608063a0d008b7e40ce32|54eddd830a5b58480a6143d616a97e3a6c23c439
         private static async Task PauseAllTorrents()
         {
             string url = "http://localhost:8080/api/v2/torrents/pause?hashes=all";
-            using HttpClient client = new HttpClient();
-
-            try
+            using (HttpClient client = new HttpClient())
             {
-                Console.WriteLine("Calling API...");
+                try
+                {
+                    Console.WriteLine("Calling API...");
 
-                HttpResponseMessage response = await client.GetAsync(url);
-                response.EnsureSuccessStatusCode();
+                    HttpResponseMessage response = await client.GetAsync(url);
+                    response.EnsureSuccessStatusCode();
 
-                string apiResponse = await response.Content.ReadAsStringAsync();
-                Console.WriteLine($"Response: {apiResponse}");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error: {ex.Message}");
-            }
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine($"Response: {apiResponse}");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error: {ex.Message}");
+                }
+            };
         }
     }
 }
